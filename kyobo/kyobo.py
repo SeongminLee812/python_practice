@@ -3,7 +3,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
-import requests
+
+options = webdriver.ChromeOptions()
+options.add_argument("window-size=1920x1080")
 
 id = input('아이디를 입력하세요 : ')
 pw = input('비밀번호를 입력하세요 : ')
@@ -12,7 +14,7 @@ pw = input('비밀번호를 입력하세요 : ')
 url = "https://kyobobook.co.kr/index.laf?gclid=CjwKCAjw-8qVBhANEiwAfjXLrkgUwqbrUHcTiuzBfaSPXTZ11U3vp0Oje4cdINlFwlhBA6keOVHF-xoCLwwQAvD_BwE"
 
 service = Service('../drivers/chromedriver.exe')
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service=service, options=options)
 
 driver.get(url)
 sleep(5)
