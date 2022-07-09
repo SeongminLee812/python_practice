@@ -14,22 +14,18 @@ elif today.weekday() == 6:
 
 warning = f'오늘은 {weekend}이므로 금요일 기준으로 제공합니다.'
 
-print(today)
 kospi_dict = dict()
-kospi_dict['SKhynic'] = '000660'
-kospi_dict['Samsung_normal'] = '005930'
+kospi_dict['SK하이닉스'] = '000660'
+kospi_dict['삼성전자'] = '005930'
+
+
+#데이터 프레임에서 행선택 하기 위해서 str형식으로 변환
+today_str = today.strftime('%Y-%m-%d')
+print(today_str)
 
 for key, val in zip(kospi_dict.keys(), kospi_dict.values()):
+    open_price = fdr.DataReader(val, today).loc[today_str, 'Open']
     print(f'{key} \n'
-          f'시작가격 :  \n {fdr.DataReader(val, today)}')
+          f'시작가격 :  {int(open_price)}원')
 
 #
-# SKhynix = fdr.DataReader('000660', today)
-# print(SKhynix[['Open', 'High', 'Low']])
-#
-# Samsung_normal = fdr.DataReader('005930', today)
-# print(Samsung_normal)
-#
-# Samsung_first = fdr.DataReader('005935', today)
-#
-
