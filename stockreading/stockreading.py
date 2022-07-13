@@ -35,6 +35,7 @@ today_str = today.strftime('%Y-%m-%d')
 result_str = ''
 result_str += '='*10 + '코스피' + '='*10
 
+print(today - datetime.timedelta(1))
 
 for key, val in zip(kospi_dict.keys(), kospi_dict.values()):
     #주말일 경우 금요일 마감 가격을 보여주기
@@ -44,6 +45,9 @@ for key, val in zip(kospi_dict.keys(), kospi_dict.values()):
     else:
         open_price = fdr.DataReader(val, today).loc[today_str, 'Open']
         result_str += f'\n\n {key} \n 시작가격 :  {int(open_price)}원'
+        # if fdr.DataReader(val, today).loc[today_str, 'Close']:
+        #     today_close_price = fdr.DataReader(val, today).loc[today_str, 'Close']
+        #     result_str += f'\n\n {key} \n 마감가격 :  {int(today_close_price)}원'
 
 result_str += '\n' + '='*10 + '나스닥' + '='*10
 for key, val in zip(nasdaq_dict.keys(), nasdaq_dict.values()):
@@ -51,7 +55,11 @@ for key, val in zip(nasdaq_dict.keys(), nasdaq_dict.values()):
         open_price = fdr.DataReader(val, today).loc[today_str, 'Close']
         result_str += f'\n\n {key} \n 마감가격 :  {float(open_price)}달러'
     else:
-        open_price = fdr.DataReader(val, today).loc[today_str, 'Open']
-        result_str += f'\n\n {key} \n 시작가격 :  {float(open_price)}달러'
+        yesterday = today - datetime.timedelta(1)
+        yesterday_str = yesterday.strftime('%Y-%m-%d')
+        open_price = fdr.DataReader(val, yesterday).loc[yesterday_str, 'Close']
+        result_str += f'\n\n {key} \n 어제종가 :  {float(open_price)}달러'
+
+
 
 print(result_str)
