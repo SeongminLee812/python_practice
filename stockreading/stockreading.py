@@ -37,6 +37,12 @@ result_str += '='*10 + '코스피' + '='*10
 
 print(today - datetime.timedelta(1))
 
+'''
+함수 구상
+def kospi(day=today): # day를 인자로 받되 기본값은 today로 넣어주기
+    
+
+'''
 for key, val in zip(kospi_dict.keys(), kospi_dict.values()):
     #주말일 경우 금요일 마감 가격을 보여주기
     if today_wd >= 5:
