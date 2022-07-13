@@ -45,9 +45,9 @@ for key, val in zip(kospi_dict.keys(), kospi_dict.values()):
     else:
         open_price = fdr.DataReader(val, today).loc[today_str, 'Open']
         result_str += f'\n\n {key} \n 시작가격 :  {int(open_price)}원'
-        # if fdr.DataReader(val, today).loc[today_str, 'Close']:
-        #     today_close_price = fdr.DataReader(val, today).loc[today_str, 'Close']
-        #     result_str += f'\n\n {key} \n 마감가격 :  {int(today_close_price)}원'
+        if fdr.DataReader(val, today).loc[today_str, 'Close']:
+            today_close_price = fdr.DataReader(val, today).loc[today_str, 'Close']
+            result_str += f'\n\n {key} \n 마감가격 :  {int(today_close_price)}원'
 
 result_str += '\n' + '='*10 + '나스닥' + '='*10
 for key, val in zip(nasdaq_dict.keys(), nasdaq_dict.values()):
